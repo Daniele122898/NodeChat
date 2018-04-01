@@ -6,8 +6,9 @@ const moment = require("moment");
 let dateOld = new Date();
 console.log(dateOld);
 */
-
-let date = moment();
+let createdAt = new Date().getTime();
+let createdAtEqual = moment().valueOf();
+let date = moment(createdAt);
 console.log(date.format('MMM Do, YYYY'));
 
 console.log(date.format('h:mm a'));
