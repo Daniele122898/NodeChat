@@ -1,11 +1,16 @@
 const moment = require("moment");
+const escape = require("escape-html");
+const emojione = require("emojione");
 
 let generateMessage = (from, text)=>{
-  return {
+    let escaped = escape(text);
+    let emojify = emojione.toImage(escaped);
+
+    return {
       from,
-      text,
+      text: emojify,
       createdAt: moment().valueOf()
-  }
+    }
 };
 
 let generateLocationMessage = (from, latitude, longitude)=>{
