@@ -32,6 +32,14 @@ socket.on("disconnect", function () {
     console.log("Disconnected from Server");
 });
 
+socket.on("updateUserList", function (users) {
+    let ol = $('<ol></ol>');
+    users.forEach(function (user) {
+        ol.append($('<li></li>').text(user));
+    });
+    $('#users').html(ol);
+});
+
 socket.on("newMessage", function (message) {
     var formattedTime = moment(message.createdAt).format("h:mm a");
     var template = $("#message-template").html();
@@ -62,12 +70,14 @@ $("#message-form").on("submit", function (e) {
     e.preventDefault();
 
     var msgTextBox = $("[name=message]");
+    var text = msgTextBox.val();
+    msgTextBox.val("");
 
     socket.emit("createMessage", {
         from: "User",
-        text: msgTextBox.val()
+        text
     }, function () {
-        msgTextBox.val("");
+        //ignored
     })
 });
 
