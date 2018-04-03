@@ -4,7 +4,7 @@ const express = require("express");
 const socketIO = require("socket.io");
 
 const {generateMessage, generateLocationMessage} = require("./utils/message");
-const {isRealString} = require("./utils/validation");
+const {isRealString, checkUniqueName} = require("./utils/validation");
 const {Users} = require("./utils/users");
 const publicPath = path.join(__dirname, "../public");
 const app = express();
@@ -21,9 +21,16 @@ io.on("connection", (socket)=>{
 
     socket.on("join", (params, callback)=>{
         if(!isRealString(params.name) || !isRealString(params.room)){
-            return callback("Name and room name are required.");
+            return callback("Name and room name are required!");
         }
         params.room = params.room.toLowerCase().trim();
+
+        let room = users.getUserList(params.room);
+
+        //check if name is unique.
+        if(checkUniqueName(params.name, room)){
+            return callback("Username already taken!");
+        }
 
         socket.join(params.room);
 
