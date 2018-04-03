@@ -155,7 +155,7 @@ button:disabled {
 }
 
 .message {
-    padding: 10px;
+    padding-left: 10px;
 }
 
 .message__body p img{
@@ -163,7 +163,12 @@ button:disabled {
     vertical-align: bottom;
 }
 
+.message__body p{
+    margin-bottom: 5px;
+}
+
 .message__title {
+    margin-top: 20px;
     display: flex;
     margin-bottom: 5px;
 }
