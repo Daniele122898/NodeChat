@@ -158,6 +158,11 @@ button:disabled {
     padding: 10px;
 }
 
+.message__body p img{
+    width: 20px;
+    vertical-align: bottom;
+}
+
 .message__title {
     display: flex;
     margin-bottom: 5px;
@@ -170,6 +175,8 @@ button:disabled {
 
 .message__title span {
     color: #999;
+    /*text-align: right;
+    width: 100%;*/
 }
 
 @media (max-width: 600px) {
