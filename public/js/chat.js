@@ -1,4 +1,5 @@
 var socket = io();
+var lastUser ="";
 
 function scrollToBottom(){
     //selectors
@@ -41,14 +42,21 @@ socket.on("updateUserList", function (users) {
 });
 
 socket.on("newMessage", function (message) {
-    var formattedTime = moment(message.createdAt).format("h:mm a");
-    var template = $("#message-template").html();
-    var html = Mustache.render(template, {
-        text: message.text, //text: emojione.toImage(message.text)
-        from: message.from,
-        createdAt: formattedTime
-    });
-    $('#messages').append(html);
+    if(message.from !== lastUser) {
+        var formattedTime = moment(message.createdAt).format("h:mm a");
+        var template = $("#message-template").html();
+        var html = Mustache.render(template, {
+            text: message.text, //text: emojione.toImage(message.text)
+            from: message.from,
+            createdAt: formattedTime
+        });
+        $('#messages').append(html);
+        lastUser = message.from;
+    } else {
+        var template = $("#message-template-small").html();
+        var html = Mustache.render(template, {text: message.text});
+        $('#messages').append(html);
+    }
     scrollToBottom();
 });
 
