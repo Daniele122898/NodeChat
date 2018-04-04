@@ -16,16 +16,35 @@
             </div>
             <div class="form-field">
                 <label>Display name</label>
-                <input type="text" name="name" autofocus>
+                <input type="text" name="name" maxlength="20" autofocus>
             </div>
             <div class="form-field">
                 <label>Room name</label>
-                <input type="text" name="room">
+                <input type="text" name="room" maxlength="30" id="room-input">
             </div>
             <div class="form-field">
                 <button>Join</button>
             </div>
         </form>
     </div>
+    <div class="room-selection">
+        <div class="form-field">
+            <h3>Active Rooms</h3>
+        </div>
+        <ul class="room-selection__rooms">
+
+        </ul>
+    </div>
+
+    <script id="room-template" type="text/template">
+        <li class="room">
+            <h4>#{{room}}</h4>
+        </li>
+    </script>
+
+    <script src="js/libs/jquery.js"></script>
+    <script src="js/libs/mustache.js"></script>
+    <script src="js/libs/index.js"></script>
+
 </body>
 </html>
