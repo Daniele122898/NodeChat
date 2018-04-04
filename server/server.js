@@ -5,6 +5,7 @@ const socketIO = require("socket.io");
 
 const {generateMessage, generateLocationMessage} = require("./utils/message");
 const {isRealString, checkUniqueName} = require("./utils/validation");
+const {getUserRooms} = require("./utils/rooms");
 const {Users} = require("./utils/users");
 const publicPath = path.join(__dirname, "../public");
 const app = express();
@@ -67,6 +68,10 @@ io.on("connection", (socket)=>{
             io.to(user.room).emit('newMessage', generateMessage("Admin", `${user.name} has left.`));
         }
     });
+});
+
+app.get("/api/getRooms", (req,res)=>{
+    res.send(getUserRooms(io.sockets.adapter.rooms));
 });
 
 server.listen(port, ()=>{
