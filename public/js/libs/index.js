@@ -4,19 +4,14 @@ $(document).ready(function () {
 
 function chatRooms() {
     var roomSel = $('.room-selection__rooms');
+    var roomInput = $('#room-input');
     $.get(window.location.origin+"/api/getRooms", function (rooms) {
         var template = $('#room-template').html();
         rooms.forEach(function (room) {
-            console.log(roomSel);
-          /*var template = $("#message-template").html();
-        var html = Mustache.render(template, {
-            text: message.text, //text: emojione.toImage(message.text)
-            from: message.from,
-            createdAt: formattedTime
-        });
-        $('#messages').append(html);*/
-          var html = Mustache.render(template, {room: room});
-          console.log(html);
+          var html = $(Mustache.render(template, {room: room}));
+          html.on("click", function () {
+              roomInput.val(room);
+          });
           roomSel.append(html);
        });
     });

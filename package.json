@@ -11,7 +11,7 @@
   "engines": {
     "node": "9.8.0"
   },
-  "author": "",
+  "author": "Serenity <d.palbanese@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "emojione": "^3.1.2",
@@ -24,5 +24,6 @@
     "expect": "^1.20.2",
     "mocha": "^3.0.2",
     "nodemon": "^1.17.3"
-  }
+  },
+  "repository": "git@github.com:Daniele122898/NodeChat.git"
 }
